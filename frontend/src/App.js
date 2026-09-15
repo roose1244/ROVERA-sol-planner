@@ -10,11 +10,14 @@ import RoutePlanner from "@/components/RoutePlanner";
 import AiBriefing from "@/components/AiBriefing";
 import Manifesto from "@/components/Manifesto";
 import Footer from "@/components/Footer";
+import SurfaceView from "@/components/SurfaceView";
 
 function App() {
   const lenisRef = useRef(null);
   const [origin, setOrigin] = useState(null);
   const [plan, setPlan] = useState(null);
+  const [descent, setDescent] = useState(null);
+  const [surfaceOpen, setSurfaceOpen] = useState(false);
 
   useEffect(() => {
     const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
@@ -38,11 +41,25 @@ function App() {
   const handleSelectOrigin = (lat, lon) => {
     setOrigin({ lat, lon, name: "Surface point" });
     setPlan(null);
+    setDescent({ lat, lon });
+  };
+
+  const handleDescentArrive = () => {
+    setSurfaceOpen(true);
+    lenisRef.current?.stop();
+  };
+
+  const handleCloseSurface = () => {
+    setSurfaceOpen(false);
+    setDescent(null);
+    lenisRef.current?.start();
   };
 
   const handleReset = () => {
     setOrigin(null);
     setPlan(null);
+    setDescent(null);
+    setSurfaceOpen(false);
   };
 
   return (
@@ -54,9 +71,11 @@ function App() {
         <Hero
           origin={origin}
           plan={plan}
+          descent={descent}
           onSelectOrigin={handleSelectOrigin}
           onReset={handleReset}
           onNavigate={scrollTo}
+          onDescentArrive={handleDescentArrive}
         />
         <Marquee />
         <TelemetryHud />
@@ -69,6 +88,7 @@ function App() {
         <Manifesto />
         <Footer />
       </main>
+      <SurfaceView open={surfaceOpen} coords={origin} onClose={handleCloseSurface} />
     </div>
   );
 }

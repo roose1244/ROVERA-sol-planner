@@ -6,7 +6,7 @@ import { MaskedLine } from "@/components/Reveal";
 
 const TITLE = "ROVERA";
 
-const Hero = ({ origin, plan, onSelectOrigin, onReset, onNavigate }) => {
+const Hero = ({ origin, plan, descent, onSelectOrigin, onReset, onNavigate, onDescentArrive }) => {
   const [hover, setHover] = useState({ lat: null, lon: null });
 
   return (
@@ -71,7 +71,7 @@ const Hero = ({ origin, plan, onSelectOrigin, onReset, onNavigate }) => {
             </button>
             <div className="font-mono-hud flex items-center gap-2 text-[11px] tracking-[0.2em] text-slate-500">
               <Crosshair className="h-3.5 w-3.5 text-[#F59E0B]" />
-              CLICK THE PLANET TO SET ORIGIN
+              CLICK THE PLANET TO DESCEND TO THE SURFACE
             </div>
           </motion.div>
         </div>
@@ -86,10 +86,33 @@ const Hero = ({ origin, plan, onSelectOrigin, onReset, onNavigate }) => {
             <MarsGlobe
               origin={origin}
               target={plan?.target || null}
+              descent={descent}
               onSelect={onSelectOrigin}
               onHover={(lat, lon) => setHover({ lat, lon })}
+              onDescentArrive={onDescentArrive}
             />
           </div>
+
+          {!origin && !descent && (
+            <motion.div
+              data-testid="hero-globe-click-hint"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 2.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="pointer-events-none absolute left-1/2 top-[38%] z-10 -translate-x-1/2"
+            >
+              <span className="animate-float-y flex flex-col items-center gap-3">
+                <span className="relative flex h-10 w-10 items-center justify-center">
+                  <span className="animate-ping-slow absolute inline-flex h-full w-full rounded-full border border-[#F59E0B]" />
+                  <span className="block h-2 w-2 rounded-full bg-[#F59E0B] shadow-[0_0_12px_rgba(245,158,11,0.9)]" />
+                </span>
+                <span className="font-mono-hud rounded border border-[#F59E0B]/40 bg-[#07090E]/80 px-3 py-1.5 text-[10px] tracking-[0.4em] text-[#F59E0B] backdrop-blur">
+                  CLICK HERE
+                </span>
+              </span>
+            </motion.div>
+          )}
 
           <div className="hud-glass font-mono-hud pointer-events-none absolute left-0 top-6 rounded-lg px-4 py-3 text-[10px] leading-relaxed tracking-[0.2em] text-slate-400">
             <div className="text-[#E25B38]">MARS // AREOCENTRIC</div>

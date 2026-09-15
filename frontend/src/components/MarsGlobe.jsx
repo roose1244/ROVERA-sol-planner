@@ -1,6 +1,6 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Stars, Line } from "@react-three/drei";
 
 const PLANET_RADIUS = 1;
@@ -253,7 +253,44 @@ const MarsPlanet = ({ origin, target, onSelect, onHover }) => {
   );
 };
 
-const MarsGlobe = ({ origin, target, onSelect, onHover }) => {
+const ZERO = new THREE.Vector3(0, 0, 0);
+
+const CameraRig = ({ descent, onArrive }) => {
+  const camera = useThree((s) => s.camera);
+  const controls = useThree((s) => s.controls);
+  const arrived = useRef(false);
+  const home = useMemo(() => new THREE.Vector3(0, 0.35, 2.75), []);
+
+  useEffect(() => {
+    arrived.current = false;
+  }, [descent]);
+
+  useFrame(() => {
+    if (!controls) return;
+    if (descent) {
+      controls.enabled = false;
+      const target = latLonToVec3(descent.lat, descent.lon, 1.32);
+      const look = latLonToVec3(descent.lat, descent.lon, 1.0);
+      camera.position.lerp(target, 0.05);
+      controls.target.lerp(look, 0.08);
+      camera.lookAt(controls.target);
+      if (!arrived.current && camera.position.distanceTo(target) < 0.06) {
+        arrived.current = true;
+        onArrive();
+      }
+    } else if (!controls.enabled) {
+      camera.position.lerp(home, 0.06);
+      controls.target.lerp(ZERO, 0.08);
+      camera.lookAt(controls.target);
+      if (camera.position.distanceTo(home) < 0.08) {
+        controls.enabled = true;
+      }
+    }
+  });
+  return null;
+};
+
+const MarsGlobe = ({ origin, target, descent, onSelect, onHover, onDescentArrive }) => {
   const [interacting, setInteracting] = useState(false);
   const idleTimer = useRef(null);
 
@@ -274,6 +311,7 @@ const MarsGlobe = ({ origin, target, onSelect, onHover }) => {
     >
       <Stars radius={90} depth={50} count={3500} factor={3.2} saturation={0} fade speed={0.4} />
       <MarsPlanet origin={origin} target={target} onSelect={onSelect} onHover={onHover} />
+      <CameraRig descent={descent} onArrive={onDescentArrive} />
       <OrbitControls
         makeDefault
         enablePan={false}
@@ -282,7 +320,7 @@ const MarsGlobe = ({ origin, target, onSelect, onHover }) => {
         maxDistance={5}
         enableDamping
         dampingFactor={0.08}
-        autoRotate={!interacting}
+        autoRotate={!interacting && !descent}
         autoRotateSpeed={0.55}
         onStart={handleStart}
         onEnd={handleEnd}

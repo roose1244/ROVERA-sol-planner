@@ -26,6 +26,9 @@ Build a webpage similar to https://jsulpis.github.io/realtime-planet-shader/mars
 - AI mission briefing card: 3 personas, SSE token streaming, browser speech readout toggle
 - Editorial marquee strip, 4 numbered manifesto chapters with imagery, mission footer with briefing signup (toast)
 - Page title set to "ROVERA — Mars Route Mission Control"
+- Surface-descent integration (2026-09-15): clicking Mars triggers a camera dive to the clicked coordinates, then opens the Sol-Window Planner page (https://rover-timeline.preview.emergentagent.com/) in a fullscreen HUD overlay ("SURFACE LINK ESTABLISHED") with RETURN TO ORBIT; camera eases back on return; lenis scroll locks while open
+- Click-here beacon (2026-09-15): pulsing amber "CLICK HERE" sign floats over the planet on first load (hero-globe-click-hint), hides permanently once an origin is set
+- NOTE: rover-timeline (Sol-Window Planner) is a separate Emergent project — its code is not in this workspace; rover/terrain changes must be made in that project's own session
 
 ## Backlog
 - P0: none blocking
