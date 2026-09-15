@@ -1,0 +1,153 @@
+{
+  "project_name": "ROVERA",
+  "archetype": "THE PERFORMANCE PRO / SPACE MISSION HUD",
+  "theme": "dark",
+  "typography": {
+    "headings": {
+      "font_family": "Syne, Outfit, sans-serif",
+      "google_font_url": "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap",
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight uppercase font-display",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight uppercase font-display",
+      "h3": "text-xl sm:text-2xl font-semibold tracking-normal font-display",
+      "h4": "text-lg sm:text-xl font-mono uppercase tracking-wider text-amber-500"
+    },
+    "telemetry_mono": {
+      "font_family": "Space Mono, JetBrains Mono, monospace",
+      "class": "font-mono text-xs sm:text-sm tracking-widest uppercase text-emerald-400/90"
+    },
+    "body": {
+      "font_family": "Outfit, Inter, sans-serif",
+      "class": "text-slate-300 text-base leading-relaxed font-light"
+    }
+  },
+  "colors": {
+    "background_void": "#07090E",
+    "surface_card": "#0D111A",
+    "surface_glass": "rgba(13, 17, 26, 0.75)",
+    "border_hud": "rgba(226, 91, 56, 0.25)",
+    "border_subtle": "rgba(255, 255, 255, 0.08)",
+    "primary_rust": "#E25B38",
+    "primary_rust_hover": "#F06A47",
+    "accent_amber": "#F59E0B",
+    "accent_cyan": "#06B6D4",
+    "status_emerald": "#10B981",
+    "text_bright": "#F8FAFC",
+    "text_muted": "#94A3B8"
+  },
+  "surface_strategy": {
+    "hud_glass": "bg-[#0D111A]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-xl",
+    "tracing_beam": "relative rounded-xl border border-[#E25B38]/30 bg-[#07090E]/90 overflow-hidden shadow-[0_0_20px_rgba(226,91,56,0.15)]",
+    "grid_borders": "border-r border-b border-white/10 p-6 sm:p-8"
+  },
+  "key_components": [
+    {
+      "name": "Navigation Bar",
+      "description": "Fixed dark mission-control top bar with blur, status pulse indicator (SOL 842 - ONLINE), mission coordinates, route planner link, and 'LAUNCH PLANNER' primary CTA.",
+      "data_testids": [
+        "nav-bar",
+        "nav-logo",
+        "nav-status-indicator",
+        "nav-link-manifesto",
+        "nav-link-telemetry",
+        "nav-link-planner",
+        "nav-cta-launch"
+      ]
+    },
+    {
+      "name": "Kinetic Hero with 3D Mars Globe",
+      "description": "Hero section featuring line-by-line masked reveal typography, interactive R3F/Three.js Mars Globe (procedural shader texture, drag rotation, scroll zoom, and clickable latitude/longitude grid to set route origin), real-time mouse coordinate display.",
+      "data_testids": [
+        "hero-section",
+        "hero-headline-masked",
+        "hero-mars-canvas",
+        "hero-coordinate-display",
+        "hero-reset-globe-button",
+        "hero-scroll-hint"
+      ]
+    },
+    {
+      "name": "Telemetry HUD Grid",
+      "description": "Real-time simulated telemetry cards showing Sol Count counter, Dust Opacity Index slider/gauge, Daylight Window countdown timer, Terrain Slope Risk meter, and Atmospheric Pressure stats.",
+      "data_testids": [
+        "telemetry-hud-section",
+        "telemetry-card-sol",
+        "telemetry-card-dust",
+        "telemetry-card-daylight",
+        "telemetry-card-terrain",
+        "telemetry-dust-slider"
+      ]
+    },
+    {
+      "name": "Interactive Route Planner Simulator",
+      "description": "Mission planning console where setting a starting origin on Mars computes the nearest safe water ice deposit (e.g., Korolev Crater Ice Sheet, Utopia Planitia Glaciers, Hellas Basin Subsurface Water). Calculates distance (km), estimated Sols required, rover battery drain rate, and risk assessment.",
+      "data_testids": [
+        "route-planner-section",
+        "route-origin-select",
+        "route-calculate-button",
+        "route-summary-panel",
+        "route-deposit-target-card",
+        "route-sol-estimate",
+        "route-risk-badge"
+      ]
+    },
+    {
+      "name": "AI Mission-Briefing Narrator",
+      "description": "Interactive AI tactical advisor card. Generates AI mission briefings via backend endpoint with audio wave animation, voice text-to-speech option, and tactical advice customization.",
+      "data_testids": [
+        "ai-briefing-card",
+        "ai-briefing-text",
+        "ai-briefing-audio-toggle",
+        "ai-briefing-generate-button",
+        "ai-briefing-persona-select"
+      ]
+    },
+    {
+      "name": "Editorial Marquee Strip",
+      "description": "Slow moving, low-contrast kinetic marquee with technical specs, coordinates, orbital velocity, and mission directives.",
+      "data_testids": [
+        "editorial-marquee-strip"
+      ]
+    },
+    {
+      "name": "Numbered Manifesto Chapters",
+      "description": "4-part structured manifesto (01. WATER IS THE SOL, 02. TERRAIN BEFORE TRAJECTORY, 03. AUTONOMOUS PATHFINDING, 04. PERMANENT HABITATION) with scroll-triggered line draw animations and technical schematics.",
+      "data_testids": [
+        "manifesto-section",
+        "manifesto-chapter-1",
+        "manifesto-chapter-2",
+        "manifesto-chapter-3",
+        "manifesto-chapter-4"
+      ]
+    },
+    {
+      "name": "Mission Footer",
+      "description": "Dark high-density footer with large outline logo, mission coordinates, API status green dot, telemetry disclaimer, and newsletter briefing form.",
+      "data_testids": [
+        "mission-footer",
+        "footer-briefing-input",
+        "footer-briefing-submit"
+      ]
+    }
+  ],
+  "image_urls": {
+    "hero_mars_rendering": "https://images.unsplash.com/photo-1647322878142-1c3b5f339f45?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwzfHxtYXJzJTIwbGFuZHNjYXBlJTIwZGFyayUyMHNwYWNlJTIwcGxhbmV0JTIwc3VyZmFjZXxlbnwwfHx8fDE3ODk0OTY2OTR8MA&ixlib=rb-4.1.0&q=85",
+    "mars_surface_dunes": "https://images.unsplash.com/photo-1527826507412-72e447368aa1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwyfHxtYXJzJTIwbGFuZHNjYXBlJTIwZGFyayUyMHNwYWNlJTIwcGxhbmV0JTIwc3VyZmFjZXxlbnwwfHx8fDE3ODk0OTY2OTR8MA&ixlib=rb-4.1.0&q=85",
+    "mars_mountains_night": "https://images.unsplash.com/photo-1635349429385-201ee3a51b88?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwxfHxtYXJzJTIwbGFuZHNjYXBlJTIwZGFyayUyMHNwYWNlJTIwcGxhbmV0JTIwc3VyZmFjZXxlbnwwfHx8fDE3ODk0OTY2OTR8MA&ixlib=rb-4.1.0&q=85",
+    "astronaut_surface_rover": "https://images.unsplash.com/photo-1614315517650-3771cf72d18a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjV8MHwxfHNlYXJjaHw0fHxtYXJzJTIwcGxhbmV0JTIwc3VyZmFjZSUyMHJvdmVyJTIwYXN0cm9uYXV0JTIwc3BhY2UlMjBtaXNzaW9uJTIwY29udHJvbHxlbnwwfHx8fDE3ODk0OTY2ODV8MA&ixlib=rb-4.1.0&q=85",
+    "astronaut_rock_formation": "https://images.unsplash.com/photo-1573588028698-f4759befb09a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjV8MHwxfHNlYXJjaHwxfHxtYXJzJTIwcGxhbmV0JTIwc3VyZmFjZSUyMHJvdmVyJTIwYXN0cm9uYXV0JTIwc3BhY2UlMjBtaXNzaW9uJTIwY29udHJvbHxlbnwwfHx8fDE3ODk0OTY2ODV8MA&ixlib=rb-4.1.0&q=85"
+  },
+  "motion_and_effects": {
+    "smooth_scroll": "Lenis smooth scroll integration",
+    "scroll_animations": "Framer motion staggered opacity & translate-y reveals with viewport once constraint",
+    "interactive_3d": "Three.js / React Three Fiber interactive procedural shader globe with custom bump map, atmosphere glow layer, clickable latitude/longitude pins, and orbit controls",
+    "micro_interactions": "Hover glow on HUD cards, live coordinate tracking, audio briefing speech synthesis effect"
+  },
+  "instructions_to_main_agent": "Ensure all components use dark HUD styling with clear high-contrast telemetry font (Space Mono or JetBrains Mono for numbers/labels, Outfit/Syne for big uppercase headlines). Every single button, select, input, slider, card, and section MUST have its exact data-testid attribute attached as defined in the rules. Implement the AI mission narrator endpoint integration cleanly in FastAPI and React.",
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Do NOT use pure transparent backgrounds on sticky nav or HUD panels — always combine dark background opacity with backdrop-blur.",
+    "Ensure high APCA contrast ratios with vibrant Rust Red (#E25B38) and Tactical Amber (#F59E0B) against Deep Void (#07090E).",
+    "All interactive and key informational elements MUST include data-testid attributes in kebab-case.",
+    "Use strict grid layout with clear padding to avoid text collisions.",
+    "Verify mobile responsiveness with responsive grid columns (grid-cols-1 md:grid-cols-2 lg:grid-cols-3)."
+  ]
+}
